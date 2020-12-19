@@ -19,6 +19,7 @@ type BoltEvent struct {
 	Bucket string `json:"bucket"`
 	Key string `json:"key"`
 	Value string `json:"value"`
+	BucketClean string `json:"bucketClean"`
 }
 
 type BoltS3OpsClient struct {
