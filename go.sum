@@ -21,8 +21,8 @@ github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+
 github.com/stretchr/testify v1.6.1 h1:hDPOHmpOpP40lSULcqw7IrRb/u7w6RpDC9399XyoNd0=
 github.com/stretchr/testify v1.6.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/urfave/cli/v2 v2.2.0/go.mod h1:SE9GqnLQmjVa0iPEY0f1w3ygNIYcIJ0OKPMoW2caLfQ=
-gitlab.com/projectn-oss/projectn-bolt-go v0.0.0-20201215190914-32b4914c8a6d h1:Wu4RNQAGvZqUCY0otQlE80mM8uobqGPWwW3iePqSTEo=
-gitlab.com/projectn-oss/projectn-bolt-go v0.0.0-20201215190914-32b4914c8a6d/go.mod h1:TQTr175K+PaPWdGkKo+VqBT3ICSIBoU5vbutFUIZdeg=
+gitlab.com/projectn-oss/projectn-bolt-go v0.0.0-20201221231333-6d6d5737f0e9 h1:8TQPBZGAWcm2l0mqfnmvTm+pGsWkoL0pY+EG+/MRFzk=
+gitlab.com/projectn-oss/projectn-bolt-go v0.0.0-20201221231333-6d6d5737f0e9/go.mod h1:TQTr175K+PaPWdGkKo+VqBT3ICSIBoU5vbutFUIZdeg=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
 golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
