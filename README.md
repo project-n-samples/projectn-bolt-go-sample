@@ -1,6 +1,6 @@
 # AWS Lambda Function in Go for Bolt
 
-Sample AWS Lambda Applications in Go that utilizes [Go SDK for Bolt](https://gitlab.com/projectn-oss/projectn-bolt-go)
+Sample AWS Lambda Function in Go that utilizes [Go SDK for Bolt](https://gitlab.com/projectn-oss/projectn-bolt-go)
 
 ### Prerequisites
 
@@ -48,10 +48,19 @@ aws lambda create-function \
 
 ### Usage
 
-* The AWS Lambda function can be tested from the AWS Management Console by creating a test event and specifying its
-  inputs in JSON format.
+The Sample AWS Lambda Function in Go illustrates the usage and various operations, via separate handlers,
+that can be performed using [Go SDK for Bolt](https://gitlab.com/projectn-oss/projectn-bolt-go).
+The deployed AWS lambda function can be tested from the AWS Management Console by creating a test event and
+specifying its inputs in JSON format.
 
-#### BoltS3OpsHandler
+Please ensure that `Bolt` is deployed before testing the sample AWS lambda function. If you haven't deployed `Bolt`,
+follow the instructions given [here](https://xyz.projectn.co/installation-guide#estimate-savings) to deploy `Bolt`.
+
+#### Testing Bolt or S3 Operations
+
+`BoltS3OpsHandler` is the handler that enables the user to perform Bolt or S3 operations.
+It sends a Bucket or Object request to Bolt or S3 and returns an appropriate response based on the parameters
+passed in as input.
 
 * BoltS3OpsHandler is the handler that is invoked by AWS Lambda to process an incoming event.
 
@@ -106,7 +115,11 @@ aws lambda create-function \
       ```
 
 
-#### BoltS3ValidateObjHandler
+#### Data Validation Tests
+
+`BoltS3ValidateObjHandler` is the handler that enables the user to perform data validation tests. It retrieves
+the object from Bolt and S3 (Bucket Cleaning is disabled), computes and returns their corresponding MD5 hash.
+If the object is gzip encoded, object is decompressed before computing its MD5.
 
 * BoltS3ValidateObjHandler is a handler that is invoked by AWS Lambda to process an incoming event for performing
   data validation tests. To use this handler, change the handler of the Lambda function to
@@ -125,3 +138,8 @@ aws lambda create-function \
       ```json
       {"bucket": "<bucket>", "key": "<key>"}
       ```
+
+### Getting Help
+
+For additional assistance, please refer to [Project N Docs](https://xyz.projectn.co/) or contact us directly
+[here](mailto:support@projectn.co)
