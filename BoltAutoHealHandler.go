@@ -12,6 +12,13 @@ import (
 	"time"
 )
 
+/*HandleAutoHealRequest is the handler function that is invoked by AWS Lambda to process an incoming event for
+ performing auto-heal tests.
+
+HandleAutoHealRequest accepts the following input parameters as part of the event:
+ 1) bucket - bucket name
+ 2) key - key name
+ */
 func HandleAutoHealRequest(ctx context.Context, event bolts3opsclient.BoltEvent) (map[string]interface{}, error) {
 
 	bucket := event.Bucket

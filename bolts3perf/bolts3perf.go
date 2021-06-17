@@ -51,6 +51,8 @@ type ObjectCount struct {
 	Uncompressed string `json:"uncompressed"`
 }
 
+// ProcessEvent extracts the parameters (requestType, bucket) from the event, uses those
+// parameters to run performance testing against Bolt / S3 and returns back performance statistics.
 func (p *BoltS3Perf) ProcessEvent(event *PerfEvent) (map[string]interface{}, error)  {
 
 	// If requestType is not passed, perform all perf tests.
@@ -127,6 +129,7 @@ func (p *BoltS3Perf) ProcessEvent(event *PerfEvent) (map[string]interface{}, err
 	}
 }
 
+// listObjectsV2Perf measures the List Objects V2 performance (latency, throughput) of Bolt / S3.
 func (p *BoltS3Perf) listObjectsV2Perf(bucket string) (map[string]interface{}, error) {
 
 	var s3ListObjTimes []int64
@@ -193,6 +196,7 @@ func (p *BoltS3Perf) listObjectsV2Perf(bucket string) (map[string]interface{}, e
 	return listObjPerfRespMap, nil
 }
 
+// putObjectPerf measures the Put Object performance (latency, throughput) of Bolt / S3.
 func (p *BoltS3Perf) putObjectPerf(bucket string) (map[string]interface{}, error) {
 	var s3PutObjTimes []int64
 	var boltPutObjTimes []int64
@@ -242,6 +246,7 @@ func (p *BoltS3Perf) putObjectPerf(bucket string) (map[string]interface{}, error
 	return putObjPerfRespMap, nil
 }
 
+// deleteObjectPerf Measures the Delete Object performance (latency, throughput) of Bolt/S3.
 func (p *BoltS3Perf) deleteObjectPerf(bucket string) (map[string]interface{}, error) {
 	var s3DelObjTimes []int64
 	var boltDelObjTimes []int64
@@ -289,6 +294,7 @@ func (p *BoltS3Perf) deleteObjectPerf(bucket string) (map[string]interface{}, er
 	return delObjPerfRespMap, nil
 }
 
+// getObjectPerf measures the Get Object performance (latency, throughput) of Bolt / S3.
 func (p *BoltS3Perf) getObjectPerf(bucket string) (map[string]interface{}, error) {
 	var s3GetObjTimes []int64
 	var boltGetObjTimes []int64
@@ -436,6 +442,7 @@ func (p *BoltS3Perf) getObjectPerf(bucket string) (map[string]interface{}, error
 	return getObjPerfRespMap, nil
 }
 
+// getObjectPassthroughPerf measures the Get Object passthrough performance (latency, throughput) of Bolt / S3.
 func (p *BoltS3Perf) getObjectPassthroughPerf(bucket string) (map[string]interface{}, error) {
 	var boltGetObjTimes []int64
 
@@ -516,6 +523,7 @@ func (p *BoltS3Perf) getObjectPassthroughPerf(bucket string) (map[string]interfa
 	return getObjPtPerfRespMap, nil
 }
 
+// allPerf measures PUT,GET,DELETE,List Objects performance (latency, throughput) of Bolt / S3.
 func (p *BoltS3Perf) allPerf(bucket string) (map[string]interface{}, error) {
 	// Put, Delete Object Perf tests using generated key names.
 	putObjPerfStats, err := p.putObjectPerf(bucket)
@@ -550,6 +558,7 @@ func (p *BoltS3Perf) allPerf(bucket string) (map[string]interface{}, error) {
 	return mergedPerfStats, nil
 }
 
+// mergePerfStats merges one or more maps containing performance statistics into one map.
 func (p *BoltS3Perf) mergePerfStats(perfStats ...map[string]interface{}) map[string]interface{} {
 	mergedPerfStats := make(map[string]interface{})
 
@@ -561,6 +570,7 @@ func (p *BoltS3Perf) mergePerfStats(perfStats ...map[string]interface{}) map[str
 	return mergedPerfStats
 }
 
+// listObjectsV2 returns a list of `numKeys` objects from the given bucket in S3.
 func (p *BoltS3Perf) listObjectsV2(bucket string) error {
 	listObjsV2Input := &s3.ListObjectsV2Input{
 		Bucket: aws.String(bucket),
@@ -577,6 +587,7 @@ func (p *BoltS3Perf) listObjectsV2(bucket string) error {
 	return nil
 }
 
+// generateKeyNames generates object names to be used in PUT, DELETE Object Perf.
 func (p *BoltS3Perf) generateKeyNames(numObjects int)  {
 	for i := 0; i < numObjects; i++ {
 		key := "bolt-s3-perf" + strconv.Itoa(i)
@@ -584,6 +595,7 @@ func (p *BoltS3Perf) generateKeyNames(numObjects int)  {
 	}
 }
 
+// generate creates a random string of certain length.
 func (p *BoltS3Perf) generate(objLength int) string {
 	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
@@ -594,6 +606,7 @@ func (p *BoltS3Perf) generate(objLength int) string {
 	return string(s)
 }
 
+// computePerfStats compute Performance Statistics
 func (p *BoltS3Perf) computePerfStats(opTimes []int64, opTp []float64, objSizes []int64) *PerfStats {
 
 	perfStats := &PerfStats{}

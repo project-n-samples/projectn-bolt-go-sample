@@ -41,7 +41,7 @@ type ListBucketsResp struct {
 	CreationDate time.Time `json:"CreationDate"`
 }
 
-// processEvent extracts the parameters (sdkType, requestType, bucket/key) from the event, uses those
+// ProcessEvent extracts the parameters (sdkType, requestType, bucket/key) from the event, uses those
 // parameters to send an Object/Bucket CRUD request to Bolt/S3 and returns back an appropriate response.
 func (c *BoltS3OpsClient) ProcessEvent(event *BoltEvent) (map[string]interface{}, error) {
 
