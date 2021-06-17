@@ -6,7 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"gitlab.com/projectn-oss/projectn-bolt-go/bolts3"
-	"io/ioutil"
+	"io"
 	"math/rand"
 	"sort"
 	"strconv"
@@ -324,7 +324,13 @@ func (p *BoltS3Perf) getObjectPerf(bucket string) (map[string]interface{}, error
 			_, _ = output.Body.Read(buf)
 		} else {
 			// read all data from the stream.
-			_, _ = ioutil.ReadAll(output.Body)
+			buf := make([]byte, 4096)
+			for {
+				_, err := output.Body.Read(buf)
+				if err == io.EOF {
+					break
+				}
+			}
 		}
 
 		// calc latency
@@ -369,7 +375,13 @@ func (p *BoltS3Perf) getObjectPerf(bucket string) (map[string]interface{}, error
 			_, _ = output.Body.Read(buf)
 		} else {
 			// read all data from the stream.
-			_, _ = ioutil.ReadAll(output.Body)
+			buf := make([]byte, 4096)
+			for {
+				_, err := output.Body.Read(buf)
+				if err == io.EOF {
+					break
+				}
+			}
 		}
 
 		// calc latency
@@ -455,7 +467,13 @@ func (p *BoltS3Perf) getObjectPassthroughPerf(bucket string) (map[string]interfa
 			_, _ = output.Body.Read(buf)
 		} else {
 			// read all data from the stream.
-			_, _ = ioutil.ReadAll(output.Body)
+			buf := make([]byte, 4096)
+			for {
+				_, err := output.Body.Read(buf)
+				if err == io.EOF {
+					break
+				}
+			}
 		}
 
 		// calc latency
